@@ -1,5 +1,5 @@
 [build-system]
-requires = ["scikit-build-core", "pybind11>=2.12"]
+requires = ["scikit-build-core", "nanobind>=2.0"]
 build-backend = "scikit_build_core.build"
 
 [project]
@@ -19,7 +19,7 @@ classifiers=[
     "Topic :: Scientific/Engineering",
 ]
 dependencies = ["numpy"]
-requires-python = '>=3.10'
+requires-python = ">=3.10"
 
 [project.readme]
 file = "README.md"
