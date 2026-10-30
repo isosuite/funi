@@ -21,9 +21,8 @@ using Array = nb::ndarray<nb::device::cpu>;
 template<typename T>
 nb::object ToNumpy(funi::Storage<T> values, std::vector<size_t> shape) {
   T* data = values.get();
-  nb::capsule owner(values.release(), [](void* p) noexcept {
-    delete[] static_cast<T*>(p);
-  });
+  nb::capsule owner(values.release(),
+                    [](void* p) noexcept { delete[] static_cast<T*>(p); });
   return nb::cast(
       nb::ndarray<nb::numpy, T>(data, shape.size(), shape.data(), owner));
 }
