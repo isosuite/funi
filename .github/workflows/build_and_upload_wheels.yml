@@ -29,24 +29,6 @@ jobs:
         name: wheels-macos-latest
         path: ./wheelhouse/*.whl
 
-  macos_wheel_intel:
-    runs-on: macos-15-intel
-
-    steps:
-    - uses: actions/checkout@v7
-      with:
-        submodules: recursive
-    - name: build wheels
-      uses: pypa/cibuildwheel@v4.1.0
-      env:
-        CIBW_ARCHS: "x86_64"
-
-    - uses: actions/upload-artifact@v7
-      with:
-        name: wheels-macos-13
-        path: ./wheelhouse/*.whl
-
-
   linux_wheel:
     runs-on: ubuntu-latest
     strategy:
