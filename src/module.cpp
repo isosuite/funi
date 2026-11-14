@@ -15,7 +15,7 @@ namespace nb = nanobind;
 
 namespace {
 
-using Array = nb::ndarray<nb::device::cpu>;
+using ReadOnlyArray = nb::ndarray<nb::device::cpu, nb::ro>;
 
 /// Hand raw storage to numpy without copying.
 template<typename T>
@@ -28,7 +28,7 @@ nb::object ToNumpy(funi::Storage<T> values, std::vector<size_t> shape) {
 }
 
 template<typename T>
-nb::tuple Run(const Array& input, const double tolerance) {
+nb::tuple Run(const ReadOnlyArray& input, const double tolerance) {
   const size_t n_rows = input.shape(0);
   const size_t n_cols = input.shape(1);
   const T* src = static_cast<const T*>(input.data());
@@ -61,7 +61,7 @@ nb::tuple Run(const Array& input, const double tolerance) {
                         ToNumpy(std::move(u.inverse), {n_rows}));
 }
 
-nb::tuple UniqueRows(const Array& query,
+nb::tuple UniqueRows(const ReadOnlyArray& query,
                      const double tolerance,
                      const std::optional<bool>& sorted_index,
                      const std::optional<std::string>& method) {
